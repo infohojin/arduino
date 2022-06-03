@@ -7,12 +7,11 @@ void setup()
 
   Serial.begin(115200);
   Serial.println("RGB ?");
-
-
 }
 
 void loop()
 {
+  // 빨강, 파랑, 녹색
 // 수신데이터가 있는지 확인
   if(Serial.available()){
     // rgb 숫자 읽기
@@ -20,9 +19,9 @@ void loop()
     int gv = Serial.parseInt();
     int bv = Serial.parseInt();
         
-    analogWrite(9, rv);
-    analogWrite(10, gv);
-    analogWrite(11, bv);
+    analogWrite(9, (255-rv));
+    analogWrite(10, (255-gv));
+    analogWrite(11, (255-bv));
 
     Serial.println(rv);
     Serial.println(gv);
