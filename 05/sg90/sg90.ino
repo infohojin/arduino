@@ -9,18 +9,16 @@ const int servoPin = 3;
 Servo myservo;
 
 void setup(){
+  // 서버 초기화
   myservo.attach(servoPin);
-  myservo.write(0);
+  myservo.write(0); // 0deg 유지
   delay(1000);
 }
 
 
 void loop() {
-  for(int i=0;i<=3;i++){
     myservo.write(180);
-    delay(1000);
-    
+    delay(1000);   
     myservo.write(0);
     delay(1000);
-  }
 }

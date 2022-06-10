@@ -19,7 +19,7 @@ void loop()
     int gv = Serial.parseInt();
     int bv = Serial.parseInt();
         
-    analogWrite(9, (255-rv));
+    analogWrite(9, (255-rv)); // 애노드 타입 변환
     analogWrite(10, (255-gv));
     analogWrite(11, (255-bv));
 

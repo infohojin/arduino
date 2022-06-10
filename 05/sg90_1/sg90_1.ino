@@ -17,17 +17,34 @@ void setup(){
 }
 
 void loop() {
-
-  // 정방향
-  for(int i=0;i<=180;i++){
+  int speed = 1;
+  
+  // 60deg 가속
+  for(int i=1;i<=60;i++){
     myservo.write(i);
-    delay(15);
+    delay(20);
   }
+
+  // 120 deg
+  for(int i=60;i<=120;i++){
+    myservo.write(i);
+    delay(50);
+  }
+
+  // 180 deg
+  for(int i=120;i<=180;i++){
+    myservo.write(i);
+    delay(20);
+  }
+
+  
+
+
 
   // 역방향
   for(int i=180;i>0;i--){
     myservo.write(i);
-    delay(15);
+    delay(50);
   }
 
 }
