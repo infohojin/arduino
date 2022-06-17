@@ -9,7 +9,7 @@ const int MATRIX=8; // (DIN, CLK, CS, 연결할 도트 매트릭스의 개수)
 // 도트 매트릭스 제어 객체 선언
 LedControl dot_matrix=LedControl(DIN,CS,CLK, MATRIX); 
 
-int n_matrix = 8;
+int n_matrix = 4;
 
 void setup(){
  for(int i=0; i<n_matrix; i++) // 매트릭스 0번부터 3번까지 세팅
@@ -24,7 +24,7 @@ void loop() {
   // 점점 채우기
   for(int k=0;k<n_matrix;k++){
     for(int i=0; i<8;i++){
-      dot_matrix.setRow(k,i,B11111111);
+      dot_matrix.setRow(k,i,B00001111);
       delay(100);
     }
      dot_matrix.clearDisplay(k);
@@ -32,7 +32,7 @@ void loop() {
 
   for(int k=(n_matrix-1);k>0;k--){
     for(int i=8; i>0;i--){
-      dot_matrix.setRow(k,i,B11111111);
+      dot_matrix.setRow(k,i,B11110000);
       delay(100);
     }
      dot_matrix.clearDisplay(k);
