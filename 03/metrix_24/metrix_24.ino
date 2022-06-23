@@ -28,7 +28,7 @@ void loop() {
   int n = 0; // 첫번째 LED모듈,
   int line = 0; // 첫번째줄
   
-  int led = 256;
+  int led = 255;
   int i;
   
   for(i=1, line=0; i<255; i*=2, line++) {
@@ -38,6 +38,6 @@ void loop() {
   }
 
   // 초기화
-  led = 256;
+  led = 255;
   dot_matrix.clearDisplay(0); // 매트릭스를 초기화
 }

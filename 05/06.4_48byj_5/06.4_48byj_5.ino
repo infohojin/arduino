@@ -5,8 +5,8 @@
 //(28BYJ-48인 경우 2048로)
 int steps = 2048;     
 
-// 스텝모터 객체 선언 (INT4, INT2, INT3, INT1) 순
-Stepper stepper(steps,  11, 9, 10, 8);  
+// 스텝모터 객체 선언 (INT1,INT2, INT3, INT4,   ) 순
+Stepper stepper(steps, 2, 3, 4, 5);  
 
 void setup() {
   stepper.setSpeed(10); // rpm : 1분당 도는 횟수, 너무 큰값을 하면 안돌아감

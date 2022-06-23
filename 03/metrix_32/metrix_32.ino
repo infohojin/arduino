@@ -4,7 +4,7 @@
 const int DIN=7; // DIN 핀을 7번
 const int CS=8;  // CS핀을 8번
 const int CLK=9; // CLK 핀을 9번에 
-const int MATRIX=4; // (DIN, CLK, CS, 연결할 도트 매트릭스의 개수)
+const int MATRIX=8; // (DIN, CLK, CS, 연결할 도트 매트릭스의 개수)
 
 // 도트 매트릭스 제어 객체 선언
 LedControl dot_matrix=LedControl(DIN,CS,CLK, MATRIX); 
@@ -20,25 +20,24 @@ void dot_metrix_init(int matrix) {
 
 void setup(){
   // 메트릭스 LED를 초기화 합니다.
-  dot_metrix_init(MATRIX); 
+  dot_metrix_init(MATRIX);
 }
+
 
 void loop() {
   int n = 0; // 첫번째 LED모듈,
   int line = 0; // 첫번째줄
 
-  int led = 0;
-  // 초기값은 1부터 시작, 첫번째 LED 켜기
-  // *2를 하는 경우 2진수의 승수많큼 크기가 커짐
-  for(int i=1; i<255; i*=2) {
-    led |= i; // 각자리의 LED를 or 연산하여 누적합니다.
-    dot_matrix.setRow(n,line, led);
-    delay(100);
-  }
-
-  for(int i=255;i>0;i/=2){
-    led &= i; // 각자리의 LED를 or 연산하여 누적합니다.
-    dot_matrix.setRow(n,line, led);
-    delay(100);
+  for(n=0;n<MATRIX;n++){
+    // 초기값은 1부터 시작, 첫번째 LED 켜기
+    // *2를 하는 경우 2진수의 승수많큼 크기가 커짐
+    for(int led=B00000001; led<255; led*=2) {
+      dot_matrix.setRow(n,line, led);
+      delay(100);
+    }
+    
+    // 다음블럭으로 넘어가기 위해서
+    // 기존 셀의 내용은 초기화
+    dot_matrix.setRow(n,line, 0);    
   }
 }
