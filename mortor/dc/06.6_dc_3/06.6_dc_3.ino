@@ -1,8 +1,8 @@
 // L298N motor driver
 //
 #define ENB 6
-#define IN3 8
-#define IN4 9
+#define IN3 9
+#define IN4 10
 
 #define ENCODER_B_A 2
 #define ENCODER_B_B A0

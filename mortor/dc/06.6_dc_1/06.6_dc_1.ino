@@ -1,6 +1,6 @@
 
-const int IN1 = 8;
-const int IN2 = 9;
+const int IN1 = 9;
+const int IN2 = 10;
 
 void setup() {
   pinMode(IN1, OUTPUT);

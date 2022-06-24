@@ -1,6 +1,6 @@
 
-const int IN1 = 8;
-const int IN2 = 9;
+const int IN1 = 9;
+const int IN2 = 10;
 
 void setup() {
   pinMode(IN1, OUTPUT);
@@ -8,18 +8,37 @@ void setup() {
 }
 
 void loop() {
-  // 정방향 회전
-  digitalWrite(IN1, HIGH);
+  // =====
+  // 정방향 : IN1 - LOW, IN2 - HIGH
+  digitalWrite(IN1, LOW);
 
-  // 점점 속도 증가
-  for(int i=50;i<255;i++) {
+  // IN2 : PWM (펄스폭)
+  for(int i=0;i<255;i++) {
     analogWrite(IN2,i);
     delay(50);
   }
 
   // 점점 속도 감소
-  for(int i=255;i>50;i--) {
+  for(int i=255;i>0;i--) {
     analogWrite(IN2,i);
     delay(50);
   }
+
+  // =====
+  // 역방향 : IN1 - HIGH, IN2 - LOW
+
+  digitalWrite(IN2, LOW);
+
+  // IN1 : PWM (펄스폭)
+  for(int i=0;i<255;i++) {
+    analogWrite(IN1,i);
+    delay(50);
+  }
+
+  // 점점 속도 감소
+  for(int i=255;i>0;i--) {
+    analogWrite(IN1,i);
+    delay(50);
+  }
+  
 }

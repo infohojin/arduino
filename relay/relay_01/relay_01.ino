@@ -8,8 +8,8 @@ void setup() {
 void loop() {
   // 릴레이 신호 깜빡임
   digitalWrite(RELAY, HIGH);
-  delay(500);
+  delay(1000);
 
   digitalWrite(RELAY, LOW);
-  delay(500);
+  delay(1000);
 }

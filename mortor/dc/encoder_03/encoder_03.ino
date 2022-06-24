@@ -17,6 +17,8 @@ unsigned long speedTime;
 unsigned long lastTime = 0;
 bool logging = false;
 
+bool direction = true;
+
 int speed = 50;
 void setSpeed(int s)
 {
@@ -46,26 +48,51 @@ void ISR_encoderB() {
   encoderBLast = encoderBA;
 
   // 회전 카운트
+  /*
   if (encoderBDir) {
     encoderBCount++;
   } else {
     encoderBCount--;
   }
+  */
+  if (direction) {
+    encoderBCount++;
+  } else {
+    encoderBCount--;
+  }
 
-  if (encoderBDir) {
+  if (direction) {
     if(encoderBCount > distance) {
       dc_stop();
     }
   } else {
-    
     if(encoderBCount < distance) {
       dc_stop();
     }
-  }
-  
-  
-  
+  }  
 }
+
+
+
+
+void position(int plus)
+{
+  distance = plus;
+  if(encoderBCount < distance) {
+    direction = true;
+    Serial.println("forward");
+    dc_forward();
+  } else if(encoderBCount > distance) {
+    direction = false;
+    Serial.println("backward");
+    dc_backward();
+  } else {
+    // 
+    Serial.println("none");
+  }
+}
+
+
 
 void setup() {
   Serial.begin(115200);
@@ -86,19 +113,43 @@ void setup() {
 void loop() {
 
   if (Serial.available()) {
+    int val=Serial.parseInt();     
+    Serial.print("deg=");
+    Serial.println(val);
+
+    int val2=Serial.parseInt(); 
+    Serial.print("deg2=");
+    Serial.println(val);
+    position(val);
+
+    /*
+    int deg = Serial.parseInt();
+    
+    Serial.print("deg = ");
+    Serial.println(deg);
+    
+    
+    */
+    /*  
     char cmd = Serial.read();
     if (cmd == 'f') {
       Serial.println("forward");
-      distance = 0;
-      
-      dc_forward();
-      logging = true;
+      /// distance = 0;
+      /// dc_forward();
+      /// logging = true;
+
+      // 8펄스 * 120 기어비 = 960 한바퀴
+      // 정밀도 = 360 / 960 = 0.09
+      position(960);
     } if (cmd == 'b') {
       Serial.println("backward");
-      distance = 960; // 8펄스 * 120 기어비 = 960 한바퀴
-      // 정밀도 = 360 / 960 = 0.09
-      dc_backward();
-      logging = true;
+      /// distance = 960; 
+      
+      ///dc_backward();
+      ///logging = true;
+      position(0);
+      
+      
     } else if (cmd == 's') {
       Serial.println("stop");
 
@@ -111,7 +162,9 @@ void loop() {
       dc_stop();
       logging = false;
     } 
+    */
   }
+
 
   unsigned long currTime = millis();
   if (active_A ) {
@@ -127,7 +180,7 @@ void loop() {
     Serial.println();
     //lastTime = currTime;
   }
-  
+
 }
 
 
@@ -135,7 +188,7 @@ void loop() {
 
 
 
-void dc_backward()
+void dc_forward()
 {
   
     if(!active_A) {
@@ -153,7 +206,7 @@ void dc_backward()
 
 }
 
-void dc_forward()
+void dc_backward()
 {
  
     if(!active_A) {
