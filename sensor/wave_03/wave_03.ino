@@ -2,7 +2,6 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-
 const int tringPin = 11;
 const int echoPin = 12;
 
@@ -51,6 +50,8 @@ void loop() {
   }
  
   // 2번째줄 첫번째칸 선택
+  lcd.setCursor(0, 1);
+  lcd.print("   ");
   lcd.setCursor(0, 1);
   lcd.print(distance);
   
